@@ -1,23 +1,12 @@
-import React from 'react'
-import { screen, render } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-import userEvent from '@testing-library/user-event'
-import { describe } from 'yargs'
-
+import React from "react";
+import {render, screen } from "@testing-library/react";
 import UserLogin from './Autenticação'
-import Autenticação from './Autenticação'
 
+describe('Testa o componente Autenticação', () => {
+    it('Testa se o componente está renderizando', () => {
+        render(<UserLogin />);
 
-describe('<UserLogin />', () => {
-    it ('Deve renderizar o componente sem erros', () => {
-       const div = document.createElement('div');
-        ReactDOM.render(<Autenticação />, div);
-        ReactDOM.unmountComponentAtNode(div);
+        expect(screen.getByText('Acessar o Sistema')).toBeInTheDocument()
+    })
 
-        // expect (
-        //     screen.getByText("heading", {name: /value/i})
-        // ).toBeInDocument()
-        // screen.logTestingPlaygroundURL()
-
-    });
 })
