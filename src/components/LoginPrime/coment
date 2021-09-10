@@ -1,0 +1,150 @@
+import React, {Component} from 'react';
+import {Container, CTA, CTALogoOne, SignUp, Description, CTALogoTwo, } from "./css";
+
+import {
+    BrowserRouter as Router,
+   Switch,
+   Route,
+   Link,
+   Redirect,
+   BrowserRouter
+  } from "react-router-dom";
+import { Button } from '@material-ui/core';
+
+
+  const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+      this.isAuthenticated = true
+      setTimeout(cb, 100) // Fake async
+    },
+    signout(cb) {
+      this.isAuthenticated = false
+      setTimeout(cb, 100)
+    }
+
+  }
+
+    const Public = () => <h3>Public</h3>
+    const Protected = () => <h3>Protected</h3>
+    
+
+    class Login extends React.Component {
+      state = {
+        redirectToReferrer: false
+      }
+      login = () => {
+        fakeAuth.authenticate(() =>{
+          this.setState(() => ({
+            redirectToReferrer: true
+          }))
+        })
+      }
+      render () {
+        const {redirectToReferrer} = this.state
+        const {from} = this.props.location.state || { from: {pathname: '/'}}
+
+        if (redirectToReferrer === true) {
+          return (
+            <Redirect to={from} />
+          )
+        }
+        return (
+          <div>
+            <p>Voce deve logar para acessar a pagina at {from.pathname}</p>
+            <Button onClick={this.login}>Logar</Button>
+          </div>
+        )
+      }
+    }
+
+    const PrivateRoute = ({component: Component, ...rest}) => (
+      <Route {...rest} render={(props) => (
+        fakeAuth.isAuthenticated === true
+        ? <Component {...props} />
+         : <Redirect to={{
+           pathname: '/login',
+           state: {from: props.location}
+         }} />
+      )} />
+    )
+
+     class LoginPrime extends Component {
+       render () {
+       return (
+         <Router>
+           <div>
+             <ul>
+               <li> <Link to='/public'>Public Page</Link></li> 
+               <li> <Link to='/protected'>protected Page</Link></li>
+               
+             </ul>
+
+             <Route path='/public' component={Public} />
+             <Route path='/login' component={Login} />
+             <PrivateRoute path='/protected' component={Protected} />
+           </div>
+         </Router>
+       )
+        //  <div>  
+        //  <BrowserRouter>
+        //  {/* <Header /> */}
+        //   <Router>
+        //    {/* <Header /> */}
+        //   <Switch>
+        //       <Route path="/login">
+        //         {/* <Login /> */}
+        //      </Route>
+        //        <Route exact path="/detail">
+        //          <Detail /> 
+        //      </Route> 
+        //      <Route exact path="/series">
+        //          <Series /> 
+        //      </Route> 
+        //      {/* <Route exact path="/login">
+        //          <Login /> 
+        //      </Route>  */}
+        //      <Route exact path="/infantil">
+        //          <Infantil /> 
+        //      </Route> 
+        //      <Route exact path="/filmes">
+        //          <Filmes /> 
+        //      </Route> 
+        //       <Route path="/">
+        //          <Home /> 
+        //       </Route>
+        //     </Switch>
+        //     </Router>  
+        //     </BrowserRouter>
+        //   </div>
+        
+      }
+    }
+     //  /detail/:id
+ 
+
+
+export default LoginPrime
+
+
+
+
+
+
+function Login() {
+    return (
+        <div>Oi</div>
+        // <Container>
+        //         <CTA>
+        //             <CTALogoOne src="/images/cta-logo-one.svg"/>
+        //             <SignUp>GET ALL THERE</SignUp>
+        //             <Description>
+        //             Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, 
+        //             e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de 
+        //             tipos e os embaralhou para fazer um livro de modelos de tipo
+        //             </Description>
+        //             <CTALogoTwo src="/images/cta-logo-two.png"/>
+        //         </CTA>
+        // </Container>
+    )
+}

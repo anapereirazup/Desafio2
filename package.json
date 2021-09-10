@@ -1,0 +1,51 @@
+{
+  "name": "homeamazon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
+    "@reduxjs/toolkit": "^1.6.0",
+    "firebase": "^8.7.0",
+    "firebase-tools": "^9.14.0",
+    "font-awesome": "^4.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^1.1.5",
+    "react-slick": "^0.28.1",
+    "redux": "^4.1.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^4.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.2.0",
+    "@testing-library/user-event": "^13.2.1",
+    "babel-jest": "^24.1.0",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0"
+    
+  }
+}
